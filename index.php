@@ -19,13 +19,16 @@
 * License along with this library. If not, see <http://www.gnu.org/licenses/>.
 *
 */
+
+require_once 'lib/TodoTxt.php';
+
 $errors = array();
-$l = new OC_L10N('TODOtxt');
+$l = new OC_L10N('TodoTxt');
 OCP\User::checkLoggedIn();
 
 $required_apps = array(
     array('id' => 'tal', 'name' => 'TAL Page Templates'),
-    array('id' => 'TODOtxt', 'name' => 'TODOtxt'),
+    array('id' => 'TodoTxt', 'name' => 'TODOtxt'),
 );
 
 foreach($required_apps as $app) {
@@ -35,12 +38,27 @@ foreach($required_apps as $app) {
     }
 }
 
+set_include_path(get_include_path() . PATH_SEPARATOR . "/3rdparty/TodoTxt/../");
+function __autoload($name) {
+    require_once str_replace(array("\\", "_"), "/", $name) . ".php";
+}
+
+$list=\OCA_TodoTxt\Storage::getTodoTxts();
+
+//Todo.txt 
+$loader = new TodoTxt\Loader\LocalLoader($list[0][url]); //standalone
+$list = $loader->pull();
+
+
+error_log(var_export($list, true));
+
 if($errors) {
-    $tmpl = new OCP\Template( "TODOtxt", "rtfm", "user" );
+    $tmpl = new OCP\Template( "TodoTxt", "rtfm", "user" );
     $tmpl->assign('errors',$errors, false);
 } else {
-    $tmpl = new OC_TALTemplate('TODOtxt', 'index', 'user');
+    $tmpl = new OC_TALTemplate('TodoTxt', 'index', 'user');
     $tmpl->assign('id',$id);
+    $tmpl->assign('list',$list);
 }
 
 $tmpl->printPage();

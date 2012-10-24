@@ -30,14 +30,14 @@ Changelog:
 
 */
 
-$l = new OC_L10N('TODOtxt');
+$l = new OC_L10N('TodoTxt');
 
 OCP\App::addNavigationEntry( array(
-    'id' => 'TODOtxt_index',
+    'id' => 'TodoTxt_index',
     'order' => 11,
-    'href' => OCP\Util::linkTo( 'TODOtxt', 'index.php' ),
-    'icon' => OCP\Util::imagePath( 'TODOtxt', 'todotxt.png' ),
-    'name' => $l->t('TODOtxt')
+    'href' => OCP\Util::linkTo( 'TodoTxt', 'index.php' ),
+    'icon' => OCP\Util::imagePath( 'TodoTxt', 'todotxt.png' ),
+    'name' => $l->t('TodoTxt')
     )
 );
 

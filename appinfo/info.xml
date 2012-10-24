@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <info>
-    <id>TODOtxt</id>
-    <name>TODOtxt</name>
+    <id>TodoTxt</id>
+    <name>TodoTxt</name>
     <description>Organize your todo.txt with ownCloud</description>
     <version>0.1</version>
     <licence>AGPL</licence>
