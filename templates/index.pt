@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html metal:use-macro="${maintemplate}/page">
+<head>
+    <title>Todo.txt</title>
+</head>
+<body>
+    <div id="content" metal:fill-slot="content" i18n:domain="TODOtxt">
+        <b>test</b>
+    </div>
+</body>
+</html>
+

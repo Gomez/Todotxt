@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<info>
+    <id>TODOtxt</id>
+    <name>TODOtxt</name>
+    <description>Organize your todo.txt with ownCloud</description>
+    <version>0.1</version>
+    <licence>AGPL</licence>
+    <author>Steffen Lindner</author>
+    <require>4</require>
+</info>
