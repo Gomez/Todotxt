@@ -65,12 +65,15 @@ class Task
             //throw new Exception\EmptyString;
             return null;
         }*/
-        $this->task = $result;
         
         // Find metadata held in the rest of the task
-        $this->findContexts($result);
-        $this->findProjects($result);
+        $result = $this->findContexts($result);
+        $result = $this->findProjects($result);
         $this->findMetadata($result);
+       
+         
+        error_log(var_export($result, true));
+        $this->task = $result;
     }
     
     /**
@@ -266,9 +269,14 @@ class Task
         // an alphanumeric or underscore, followed either by the end of
         // the string or by whitespace.
         $pattern = "/@(\S+\w)(?=\s|$)/";
+        
         if (preg_match_all($pattern, $input, $matches) > 0) {
             $this->addContexts($matches[1]);
+            foreach ($matches[0] as $match) {
+                $input = str_replace($match,'',$input);
+            }
         }
+        return $input;
     }
     
     /**
@@ -280,7 +288,12 @@ class Task
         $pattern = "/\+(\S+\w)(?=\s|$)/";
         if (preg_match_all($pattern, $input, $matches) > 0) {
             $this->addProjects($matches[1]);
+            foreach ($matches[0] as $match) {
+                $input = str_replace($match,'',$input);
+            }
+ 
         }
+        return $input;
     }
     
     /**

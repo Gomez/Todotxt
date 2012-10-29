@@ -1,0 +1,4 @@
+(A) 2012-09-17 Steve weiterschauen: http://tinyurl.com/8qmeakl
+(F) 2012-09-26 Markus Kotti seite bauen
+Abfangen wenn keine todo.txt gibt
+

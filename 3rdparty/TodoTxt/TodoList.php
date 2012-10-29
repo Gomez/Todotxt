@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . "/Task.php";
-
 namespace TodoTxt;
+
+require_once __DIR__ . "/Task.php";
 
 class TodoList implements \ArrayAccess, \Countable, \SeekableIterator, \Serializable
 {
@@ -48,7 +48,40 @@ class TodoList implements \ArrayAccess, \Countable, \SeekableIterator, \Serializ
     public function getTasks() {
         return $this->tasks;
     }
-    
+
+    /* This is the static comparing function: */
+    static function cmpPI($a, $b)
+    {
+        $al = strtolower($a->getPriority());
+        $bl = strtolower($b->getPriority());
+        if ($al == $bl) {
+            return 0;
+        }
+        return ($al > $bl) ? +1 : -1;
+    }		
+ 
+    static function cmpCO($a, $b)
+    {
+        $al = strtolower($a->getContext());
+        $bl = strtolower($b->getContext());
+        if ($al == $bl) {
+            return 0;
+        }
+        return ($al > $bl) ? +1 : -1;
+    }		
+ 
+    public function sortByPriorites() {
+        $tasks = $this->getTasks();
+        usort($tasks, array($this, "cmpPI"));
+        return $tasks; 
+    }
+  
+    public function sortByContexts() {
+        $tasks = $this->getTasks();
+        usort($tasks, array($this, "cmpPI"));
+        return $tasks; 
+    }
+   
     public function sort($mode = 0) {
         return;
     }

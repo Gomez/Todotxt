@@ -1,0 +1,97 @@
+
+.todos {  
+    margin-top:40px; 
+    padding:10px;
+}
+
+.todos li {
+    display:block;
+    margin-bottom: 10px;
+}  
+
+.todos .prio {
+    background-color: #841F02;
+    border-radius: 10px 10px 10px 10px;
+    color: #FFFFFF;
+    float: left;
+    margin-right: 10px;
+    padding: 2px 8px;
+}
+
+.todos .prioA {
+    background-color: #E1830C;
+}
+
+.todos .prioB {
+    background-color: #C36309;
+}
+
+.todos .prioC {
+    background-color: #B35207;
+}
+
+.todos .prioD {
+    background-color: #A44105;
+}
+
+.todos .prioE {
+    background-color: #943004;
+}
+
+.todos .creationDate {
+    float: left;
+    padding-right: 5px;
+    position: relative;
+    top: 4px;
+}
+
+.todos .task {
+    float: left;
+    font-weight:bold;
+    padding-right: 5px;
+    position: relative;
+    top: 4px;
+}
+
+.todos .contexts {
+    float: left;
+    font-weight: bold;
+    position: relative;
+    top: 4px;
+}
+
+.todos .contexts .context {
+    padding-right: 5px;
+}
+
+.todos .projects {
+    float: left;
+    font-weight: bold;
+    position: relative;
+    top: 4px;
+}
+
+.todos .projects .project {
+    padding-right: 5px;
+}
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+ 
+.clearfix {
+    display: inline-block;
+}
+ 
+html[xmlns] .clearfix {
+    display: block;
+}
+ 
+* html .clearfix {
+    height: 1%;
+}

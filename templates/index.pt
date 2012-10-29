@@ -5,7 +5,48 @@
 </head>
 <body>
     <div id="content" metal:fill-slot="content" i18n:domain="TODOtxt">
-        <b>test</b>
+        <div id="controls">
+            <div class="actions ">
+                 <div class="button" id="edit">
+                                        <input type="hidden" name="dir" value="/" id="dir"></input> 
+                        <a href="">Edit</a>
+                </div>
+            </div>
+            <div id="file_action_panel" activeaction="false"></div>
+        </div>
+     <div class="todos">
+        <ul>
+            <li class="clearfix" tal:repeat="task list">
+                <div class="prio" 
+                      tal:define="priority task/getPriority" 
+                      tal:condition="priority" 
+                      tal:attributes="class php: priority ? 'prio prio'. priority : 'prio'" 
+                      tal:content="priority">Priority</div> 
+                <div class="creationDate" 
+                      tal:define="creationDate php: task.getCreationDate().format('Y-m-d')"
+                      tal:condition="creationDate" 
+                      tal:content="creationDate">creationDate</div> 
+                <div class="task" 
+                      tal:define="task task/getTask"
+                      tal:condition="task" 
+                      tal:content="task">task</div> 
+                <div class="contexts"
+                      tal:condition="contexts" 
+                      tal:define="contexts task/contexts">
+                    <span class="context"
+                          tal:repeat="context contexts"
+                          tal:content="php:'@' . context">context</span>
+                </div> 
+                 <div class="projects"
+                      tal:condition="projects" 
+                      tal:define="projects task/projects">
+                    <span class="porjects"
+                          tal:repeat="project projects"
+                          tal:content="php:'+' . project">project</span>
+                </div> 
+            </li>
+        </ul>
+    </div>
     </div>
 </body>
 </html>

@@ -20,15 +20,25 @@
 *
 */
 
-require_once 'lib/TodoTxt.php';
+require_once 'lib/Todotxt.php';
+
+//__autoloader dont work, manual require:
+require_once '3rdparty/TodoTxt/Loader/LocalLoader.php';
+require_once '3rdparty/TodoTxt/TodoList.php';
+require_once '3rdparty/TodoTxt/Task.php';
+
+OCP\Util::addStyle( 'Todotxt', 'style' );
+OCP\Util::addscript( 'Todotxt', 'aceeditor/ace');
+OCP\Util::addscript( 'Todotxt', 'editor');
 
 $errors = array();
-$l = new OC_L10N('TodoTxt');
+$l = new OC_L10N('Todotxt');
 OCP\User::checkLoggedIn();
+OCP\JSON::checkLoggedIn();
 
 $required_apps = array(
     array('id' => 'tal', 'name' => 'TAL Page Templates'),
-    array('id' => 'TodoTxt', 'name' => 'TODOtxt'),
+    array('id' => 'Todotxt', 'name' => 'Todotxt'),
 );
 
 foreach($required_apps as $app) {
@@ -38,27 +48,24 @@ foreach($required_apps as $app) {
     }
 }
 
-set_include_path(get_include_path() . PATH_SEPARATOR . "/3rdparty/TodoTxt/../");
-function __autoload($name) {
-    require_once str_replace(array("\\", "_"), "/", $name) . ".php";
-}
+$todoTxtList=\OCA_Todotxt\Storage::getTodotxts();
 
-$list=\OCA_TodoTxt\Storage::getTodoTxts();
+$userhome = OC_User::getHome(OCP\User::getUser());
 
-//Todo.txt 
-$loader = new TodoTxt\Loader\LocalLoader($list[0][url]); //standalone
+//Load 3rdparty todotxt
+$loader = new TodoTxt\Loader\LocalLoader($userhome . "/files" . $todoTxtList[0]['url']); //standalone
 $list = $loader->pull();
+//usort($tasks, array("TodoTxt\TodoList", "cmpPI"));
+$tasks = $list->sortByContexts(); 
 
-
-error_log(var_export($list, true));
+//error_log(var_export($tasks, true));
 
 if($errors) {
-    $tmpl = new OCP\Template( "TodoTxt", "rtfm", "user" );
+    $tmpl = new OCP\Template( "Todotxt", "rtfm", "user" );
     $tmpl->assign('errors',$errors, false);
 } else {
-    $tmpl = new OC_TALTemplate('TodoTxt', 'index', 'user');
-    $tmpl->assign('id',$id);
-    $tmpl->assign('list',$list);
+    $tmpl = new OC_TALTemplate('Todotxt', 'index', 'user');
+    $tmpl->assign('list',$tasks);
 }
 
 $tmpl->printPage();
