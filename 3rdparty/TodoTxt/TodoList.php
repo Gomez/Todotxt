@@ -54,6 +54,8 @@ class TodoList implements \ArrayAccess, \Countable, \SeekableIterator, \Serializ
     {
         $al = strtolower($a->getPriority());
         $bl = strtolower($b->getPriority());
+        $al = !empty($al) ? $al : 'zzz';
+        $bl = !empty($bl) ? $bl : 'zzz';
         if ($al == $bl) {
             return 0;
         }

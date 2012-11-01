@@ -15,37 +15,69 @@
             <div id="file_action_panel" activeaction="false"></div>
         </div>
      <div class="todos">
-        <ul>
-            <li class="clearfix" tal:repeat="task list">
-                <div class="prio" 
-                      tal:define="priority task/getPriority" 
-                      tal:condition="priority" 
-                      tal:attributes="class php: priority ? 'prio prio'. priority : 'prio'" 
-                      tal:content="priority">Priority</div> 
-                <div class="creationDate" 
-                      tal:define="creationDate php: task.getCreationDate().format('Y-m-d')"
-                      tal:condition="creationDate" 
-                      tal:content="creationDate">creationDate</div> 
-                <div class="task" 
-                      tal:define="task task/getTask"
-                      tal:condition="task" 
-                      tal:content="task">task</div> 
-                <div class="contexts"
+        <table>
+            <thead>
+                <tr>
+                    <th id="headerName">
+                        <input type="checkbox" id="select_all" original-title=""></input>
+                        <span class="priority">Priority</span>
+                    </th>
+                    <th id="headerDate">
+                        <span id="modified">Erstellt</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="fileList">
+                <script type="text/javascript">
+                    var publicListView = false;
+                </script>
+        
+                <tr tal:repeat="task list">
+                <td class="filename svg ui-draggable ui-droppable">
+                    <span class="prio" 
+                          tal:define="priority task/getPriority" 
+                          tal:attributes="class php: priority ? 'prio prio'. priority : 'prio prioEmpty'" 
+                          tal:content="priority">
+                        Priority 
+                    </span>
+                    <span class="task" 
+                          tal:define="task task/getTask"
+                          tal:condition="task" 
+                          tal:content="task">
+                        Task 
+                    </span>
+
+               <tal:rep class="contexts"
                       tal:condition="contexts" 
                       tal:define="contexts task/contexts">
                     <span class="context"
                           tal:repeat="context contexts"
                           tal:content="php:'@' . context">context</span>
-                </div> 
-                 <div class="projects"
-                      tal:condition="projects" 
+                </tal:rep> 
+                      
+               <tal:rep class="projects"
+                    tal:condition="projects" 
                       tal:define="projects task/projects">
                     <span class="porjects"
                           tal:repeat="project projects"
                           tal:content="php:'+' . project">project</span>
-                </div> 
-            </li>
-        </ul>
+                </tal:rep>
+                </td> 
+                <td class="date">
+                    <span style="color:rgb(27,27,27)"
+                          title="October 29, 2012, 20:20" 
+                          class="creationDate"
+                          tal:define="creationDate php: task.getCreationDate() ? task.getCreationDate().format('Y-m-d') : ''"
+                          tal:condition="creationDate" 
+                          tal:content="creationDate">creationDate
+                    </span> 
+
+
+
+                </td>
+            </tr>
+            </tbody>
+    </table>
     </div>
     </div>
 </body>

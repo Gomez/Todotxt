@@ -1,7 +1,51 @@
+table {
+    position: relative;
+    top: 37px;
+    width: 100%;
+}
+
+table td { border-bottom:1px solid #eee; font-style:normal; background-position:1em .5em; background-repeat:no-repeat; }
+
+table th {
+    color: #999999;
+    height: 2em;
+    padding: 0 0.5em;
+}
+
+#select_all {
+    float: left;
+    margin: 0.3em 0.6em 0 0.5em;
+}
+
+table th .name {
+    float: left;
+    margin-left: 0.5em;
+}
+
+table th#headerSize, table td.filesize {
+    padding: 0 1em;
+    text-align: right;
+    width: 3em;
+}
+
+table th#headerDate, table td.date {
+    padding: 0 0.1em 0 1em;
+    text-align: left;
+    width: 11em;
+}
+
+table th, table td {
+    border-bottom: 1px solid #DDDDDD;
+    font-weight: normal;
+    text-align: left;
+}
+table th {
+    color: #999999;
+    height: 2em;
+    padding: 0 0.5em;
+}
 
 .todos {  
-    margin-top:40px; 
-    padding:10px;
 }
 
 .todos li {
@@ -14,9 +58,17 @@
     border-radius: 10px 10px 10px 10px;
     color: #FFFFFF;
     float: left;
+    padding: 1px 6px;
+    margin:0.5em;
     margin-right: 10px;
-    padding: 2px 8px;
+    margin-left: 10px;
 }
+
+.todos .prioEmpty {
+    margin: 14px;
+    background-color: transparent;
+}
+
 
 .todos .prioA {
     background-color: #E1830C;
@@ -50,7 +102,7 @@
     font-weight:bold;
     padding-right: 5px;
     position: relative;
-    top: 4px;
+    top: 7px;
 }
 
 .todos .contexts {

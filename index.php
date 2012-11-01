@@ -50,13 +50,17 @@ foreach($required_apps as $app) {
 
 $todoTxtList=\OCA_Todotxt\Storage::getTodotxts();
 
-$userhome = OC_User::getHome(OCP\User::getUser());
+if(empty($todoTxtList)) {
+    $errors[] = (string)$l->t('<div id="emptyfolder">'.$l->t('No todo folder found in your ownCloud. Please create a todo folder and put in a todo.txt.</br></br> Example? <a style="color: #1188DD;" href="http://todotxt.com/todo.txt">here.</a> Help? <a style="color: #1188DD;" href="https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format">here.</a>').'</div>');
+} else {
 
-//Load 3rdparty todotxt
-$loader = new TodoTxt\Loader\LocalLoader($userhome . "/files" . $todoTxtList[0]['url']); //standalone
-$list = $loader->pull();
-//usort($tasks, array("TodoTxt\TodoList", "cmpPI"));
-$tasks = $list->sortByContexts(); 
+    $userhome = OC_User::getHome(OCP\User::getUser());
+
+    //Load 3rdparty todotxt
+    $loader = new TodoTxt\Loader\LocalLoader($userhome . "/files" . $todoTxtList[0]['url']); //standalone
+    $list = $loader->pull();
+    $tasks = $list->sortByContexts(); 
+}
 
 //error_log(var_export($tasks, true));
 
