@@ -1,9 +1,9 @@
 <?php
 /**
-* ownCloud - Journal
+* ownCloud - TodoTxt for ownCloud
 *
-* @author Thomas Tanghus
-* @copyright 2012 Thomas Tanghus <thomas@tanghus.net>
+* @author Steffen Lindner
+* @copyright 2013 Steffen Lidnner <gomez@flexiabel.de>
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU AFFERO GENERAL PUBLIC LICENSE
@@ -28,8 +28,7 @@ require_once '3rdparty/TodoTxt/TodoList.php';
 require_once '3rdparty/TodoTxt/Task.php';
 
 OCP\Util::addStyle( 'Todotxt', 'style' );
-OCP\Util::addscript( 'Todotxt', 'aceeditor/ace');
-OCP\Util::addscript( 'Todotxt', 'editor');
+OCP\Util::addscript( 'Todotxt', 'Todotxt');
 
 $errors = array();
 $l = new OC_L10N('Todotxt');
@@ -51,7 +50,7 @@ foreach($required_apps as $app) {
 $todoTxtList=\OCA_Todotxt\Storage::getTodotxts();
 
 if(empty($todoTxtList)) {
-    $errors[] = (string)$l->t('<div id="emptyfolder">'.$l->t('No todo folder found in your ownCloud. Please create a todo folder and put in a todo.txt.</br></br> Example? <a style="color: #1188DD;" href="http://todotxt.com/todo.txt">here.</a> Help? <a style="color: #1188DD;" href="https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format">here.</a>').'</div>');
+    $errors[] = (string)$l->t('<div id="emptyfolder">'.$l->t('No todo folder found in your ownCloud. Please create a folder named "todo" and put in a todo.txt.</br></br> Example? <a style="color: #1188DD;" href="http://todotxt.com/todo.txt">here.</a> Help? <a style="color: #1188DD;" href="https://github.com/ginatrapani/todo.txt-cli/wiki/The-Todo.txt-Format">here.</a>').'</div>');
 } else {
 
     $userhome = OC_User::getHome(OCP\User::getUser());
@@ -61,8 +60,6 @@ if(empty($todoTxtList)) {
     $list = $loader->pull();
     $tasks = $list->sortByContexts(); 
 }
-
-//error_log(var_export($tasks, true));
 
 if($errors) {
     $tmpl = new OCP\Template( "Todotxt", "rtfm", "user" );

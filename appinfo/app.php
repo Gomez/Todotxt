@@ -1,10 +1,10 @@
 <?php
 
 /**
-* ownCloud - Quota Bar plugin
+* ownCloud - TodoTxt for ownCloud
 *
 * @author Steffen Lindner
-* @copyright 2012 Steffen Lindner gomez@flexiabel.de
+* @copyright 2013 Steffen Lindner gomez@flexiabel.de
 * 3rdparty
 * @copyright 2012 Gentleface.com todo.png CC License
 * 

@@ -70,9 +70,7 @@ class Task
         $result = $this->findContexts($result);
         $result = $this->findProjects($result);
         $this->findMetadata($result);
-       
          
-        error_log(var_export($result, true));
         $this->task = $result;
     }
     
