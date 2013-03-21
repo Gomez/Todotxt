@@ -27,13 +27,13 @@ class Storage {
     public static function getTodoTxts() {
         $TodoTxts=array();
         $files = array();
-        $folder=\OC_FileCache::search('todo');
-        $todofiles=\OC_FileCache::search('todo.txt');
+        $folder=\OC\Files\Filesystem::search('todo');
+        $todofiles=\OC\Files\Filesystem::search('todo.txt');
         foreach($todofiles as $file) {
             if (strrpos($folder[0], $file) === false) {
                 $info=pathinfo($file);
-                $size=\OC_Filesystem::filesize($file);
-                $mtime=\OC_Filesystem::filemtime($file);
+                $size=\OC\Files\Filesystem::filesize($file);
+                $mtime=\OC\Files\Filesystem::filemtime($file);
 
                 $entry=array('url'=>$file,'name'=>$info['filename'],'size'=>$size,'mtime'=>$mtime);
                 $TodoTxts[]=$entry;
